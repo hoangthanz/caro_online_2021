@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginModel } from '../models/login-model';
 import { CaroOnlineApiService } from '../services/caro-online-api.service';
+import { CaroRealTimeService } from '../services/caro-real-time.service';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,23 @@ export class LoginComponent implements OnInit {
   constructor(
     private _caroOnlineApiService: CaroOnlineApiService,
     private _snackBar: MatSnackBar,
-    private _router: Router
+    private _router: Router,
+    private _caroRealtime: CaroRealTimeService
   ) {
+
+    //kết nối cổng thời gian thực
+    this._caroRealtime.startConnection();
+    // Lắng nghe sự thay đổi của user 
+    this._caroRealtime.addTransferUserOnlineListener();   
+
+
+
+
+    
+    let loadingRegister = <boolean><unknown>localStorage.getItem('loading_register');
+
+    if (false === loadingRegister)
+      return;
 
     let username = localStorage.getItem('user_name_register')?.toString();
     let password = localStorage.getItem('password_register')?.toString();

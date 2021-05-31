@@ -53,6 +53,7 @@ import { RegisterComponent } from './register/register.component';
 import { CaroOnlineApiService } from './services/caro-online-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from "@auth0/angular-jwt";
+import { CaroRealTimeService } from './services/caro-real-time.service';
 
 
 export function tokenGetter() {
@@ -124,7 +125,8 @@ export function tokenGetter() {
   ],
   providers: [
     CaroOnlineApiService,
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } }
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } },
+    CaroRealTimeService
   ],
   bootstrap: [AppComponent]
 })

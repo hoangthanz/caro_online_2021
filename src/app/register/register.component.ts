@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
 
     localStorage.setItem('user_name_register', this.registerModel.userName);
     localStorage.setItem('password_register', this.registerModel.password);
-
+    localStorage.setItem('loading_register', 'true');
+    
     this.goToNav('login');
   }
 
