@@ -56,6 +56,8 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { CaroRealTimeService } from './services/caro-real-time.service';
 
 
+
+
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
@@ -122,6 +124,7 @@ export function tokenGetter() {
         disallowedRoutes: [],
       },
     }),
+
   ],
   providers: [
     CaroOnlineApiService,

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -7,9 +8,22 @@ import { environment } from 'src/environments/environment';
 })
 export class CaroRealTimeService {
 
-  private hubConnection: HubConnection | undefined
+  private hubConnection: HubConnection;
 
   public users: any;
+
+
+  public messageSource = new BehaviorSubject(null);
+
+  public sendMessage(message: any) {
+    this.messageSource.next(message);
+  }
+
+  constructor() {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl(`${environment.caroDomain}/real-time`)
+      .build();
+  }
 
   public startConnection = () => {
     this.hubConnection = new HubConnectionBuilder()
@@ -23,12 +37,13 @@ export class CaroRealTimeService {
   }
 
   public addTransferUserOnlineListener = () => {
-    this.hubConnection?.on('user-online', (users: any) => {
+    this.hubConnection.on('user-online', (users: any) => {
+      console.log("Có ai đó đã login or logout");
       this.users = users;
-      console.log(users);
+      this.sendMessage(this.users);
     });
   }
 
-  constructor() { }
+
 
 }
