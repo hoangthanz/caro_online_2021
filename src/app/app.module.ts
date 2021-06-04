@@ -54,6 +54,7 @@ import { CaroOnlineApiService } from './services/caro-online-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from "@auth0/angular-jwt";
 import { CaroRealTimeService } from './services/caro-real-time.service';
+import { ConfirmComponent } from './shared/components/confirm/confirm.component';
 
 
 
@@ -70,7 +71,8 @@ export function tokenGetter() {
     MainLayoutComponent,
     ChatRoomComponent,
     MatchDualComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

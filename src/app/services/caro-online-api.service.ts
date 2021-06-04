@@ -21,4 +21,11 @@ export class CaroOnlineApiService {
   public getUsers = () => this.http.get(`${environment.caroDomain}/api/User/get-users`);
 
   public logout = (loginModel: LoginModel) => this.http.post(`${environment.caroDomain}/api/User/logout`, loginModel, { responseType: 'text' });
+
+
+  public getRooms = () => this.http.get(`${environment.caroDomain}/api/Rooms`);
+
+  public joinRoom = (userId: string, roomId: string) => this.http.post(`${environment.caroDomain}/api/UserRooms`,
+    { userId: userId, roomId: roomId }
+  );
 }
